@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+			
+			background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=2000);
+			background-size: cover;
+		}
+		.vibe{
+			text-align: center;
+			margin-top: 6%;
+			margin-right: 5%;
+		}
+	</style>
+</head>
+<body> 
+	<div class="vibe">
+		<p><input id="username" placeholder="enter your name"/></p>
+		<p><input id="password" placeholder="enter password"></p>
+		<select id="car">
+		  <option>select a car</option>
+		  <option value="Thar">Thar</option>
+		  <option value="Verna">Verna</option>
+		  <option value="Mercedes">Mercedes</option>
+		  <option value="Audi">Audi</option>
+		  <option value="City">City</option>
+		  <option value="Skoda">Skoda</option>
+		</select>
+		<p>select your gender</p>
+		<p>
+			<input id="male" type="radio" name="gender"/>male
+		    <input id="female" type="radio" name="gender"/>female
+		</p>
+		<p><button onclick="huge()">submit</button></p>
+    </div>
+	<script type="text/javascript">
+		function huge(){
+			var username=document.getElementById("username").value
+			console.log(username)
+			var password=document.getElementById("password").value
+			console.log(password)
+			var car=document.getElementById("car").value
+			console.log(car)
+			var gmale=document.getElementById("male").checked
+			var gfemale=document.getElementById("female").checked
+			if(gmale==true) var gender="male"
+			else var gender="female"
+			console.log(gender)
+			fetch("http://localhost:3210/newData",{
+				method:"POST",
+				headers:{
+					"content-Type":"application/json"
+				},
+				body:JSON.stringify({name:username,password:password,car:car,gender:gender})
+			})
+			.then((res)=>{
+				console.log(res)
+				if(res.status===200)
+					alert("registration page")
+			})
+			.catch((err)=>{
+				alert(err)
+			})
+		}
+	</script>
+	
+
+</body>
+</html>
